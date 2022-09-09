@@ -1,0 +1,47 @@
+<div class="login-box">
+
+    <alert-error [(show)]="showMessageError">Ops! Credenciais Inválidas.</alert-error>
+
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="#" class="h1"><b>MyClients</b></a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Informe seu e-mail e senha</p>
+            <form method="post" (submit)="login()">
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" name="email" placeholder="Email"
+                        [(ngModel)]="credentials.email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="Password"
+                        [(ngModel)]="credentials.password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    </div>
+
+                </div>
+            </form>
+
+            <p class="mb-0">
+                <a href="register.html" class="text-center">Register</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>

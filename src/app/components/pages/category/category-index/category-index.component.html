@@ -1,0 +1,63 @@
+<div class="table-responsive-sm col-md-10 p-2">
+
+    <div class="card-header mb-2">
+        <button type="button" class="btn btn-sm btn-dark" (click)="categoryStoreService.showModalInsert()"><i
+                class="fas fa-layer-group mr-2"></i> Nova
+            Categoria</button>
+    </div>
+    <h6><i class="fas fa-filter"></i> Filtros</h6>
+    <div class="row">       
+        <div class="form-group col-sm-3">
+            <category-search (onSearch)="search($event)"></category-search>
+        </div>
+    </div>
+
+
+
+    <table class="table table-borderless table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Categoria</th>
+                <th scope="col" class="text-center">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories | paginate : {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}; let i = index"
+                [ngClass]="{'text-danger': !category.active}">
+                <td>{{category.id}}</td>
+                <td>{{category.name}}</td>
+                <td class="text-center">
+                    <span class="badge" [ngClass]="{'badge-success': category.active, 'badge-danger':!category.active}">
+                        {{category.active ? 'Ativo' : 'Inativo'}}
+                    </span>
+                </td>
+                <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-sm btn-primary mr-2" placement="top"
+                        ngbTooltip="Editar Categoria" (click)="categoryStoreService.showModalEdit(category.id!)"><i
+                            class="fas fa-sync-alt"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-danger" placement="top"
+                        ngbTooltip="Deletar Categoria" (click)="categoryStoreService.showModalDelete(category.id!)"><i
+                            class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-sm justify-content-center">
+        <pagination-controls (pageChange)="pageChanged($event)" previousLabel="Anterior" nextLabel="Próximo">
+        </pagination-controls>
+    </div>
+
+</div>
+
+
+<category-new (onSuccess)="categoryStoreService.onInsertSuccess($event)"
+    (onError)="categoryStoreService.onInsertError($event)"></category-new>
+
+<category-edit [categoryId]="categoryId" (onSuccess)="categoryStoreService.onEditSuccess($event)"
+    (onError)="categoryStoreService.onEditError($event)">
+</category-edit>
+
+<category-delete [categoryId]="categoryId" (onSuccess)="categoryStoreService.onDeleteSuccess($event)"
+    (onError)="categoryStoreService.onDeleteError($event)"></category-delete>

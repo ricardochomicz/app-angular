@@ -1,0 +1,60 @@
+<div class="table-responsive-sm col-md-10 p-2">
+
+    <div class="card-header mb-2">
+        <button type="button" class="btn btn-sm btn-dark" (click)="tagStoreService.showModalInsert()"><i
+                class="fas fa-tag mr-2"></i> Nova
+            Tag</button>
+        <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 200px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-borderless table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Tipo</th>
+
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let tag of tags | paginate:{itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+                <td>{{tag.id}}</td>
+                <td>#{{tag.name}}</td>
+                <td>{{tag.label}}</td>
+
+                <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-sm btn-primary mr-2"
+                        (click)="tagStoreService.showModalEdit(tag.id!)"><i class="fas fa-sync-alt"></i></a>
+                    <!-- <a href="javascript:void(0)" class="btn btn-sm btn-danger"
+                        (click)="tagStoreService.showModalDelete(tag.id!)"><i class="fas fa-trash-alt"></i></a> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-sm justify-content-center">
+        <pagination-controls (pageChange)="pageChanged($event)" previousLabel="Anterior" nextLabel="Próximo">
+        </pagination-controls>
+    </div>
+</div>
+
+
+<tag-new (onSuccess)="tagStoreService.onInsertSuccess($event)" (onError)="tagStoreService.onInsertError($event)">
+</tag-new>
+
+<tag-edit [tagId]="tagId" (onSuccess)="tagStoreService.onEditSuccess($event)"
+    (onError)="tagStoreService.onEditError($event)">
+</tag-edit>
+
+<!-- <category-delete [categoryId]="categoryId" (onSuccess)="tagStoreService.onDeleteSuccess($event)"
+(onError)="tagStoreService.onDeleteError($event)"></category-delete> -->

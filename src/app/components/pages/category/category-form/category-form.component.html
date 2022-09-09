@@ -1,0 +1,11 @@
+<div class="form-group" [formGroup]="form">
+    <label for="">Nome</label>
+    <input type="text" name="name" formControlName="name" class="form-control">
+</div>
+<!-- Rounded switch -->
+<div class="form-group" [formGroup]="form" *ngIf="form.get('active')">
+    <label class="switch">
+        <input type="checkbox" name="active" formControlName="active">
+        <span class="slider round"></span>
+    </label>
+</div>

@@ -1,0 +1,11 @@
+<modal>
+    <h5 modal-title>Deletar Categoria</h5>
+    <div modal-body>
+        <overlay-modal [(show)]="showSpinner"></overlay-modal>
+        <p>Deseja deletar a categoria <strong>{{category}}</strong>?</p>
+    </div>
+    <div modal-footer>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" (click)="destroy()" class="btn btn-danger">Deletar</button>
+    </div>
+</modal>
